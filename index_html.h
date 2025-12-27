@@ -3,11 +3,11 @@
 
 const char INDEX_HTML[] PROGMEM = R"rawliteral(
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WordClock Settings</title>
+    <title>Wortuhr Einstellungen</title>
     <style>
         :root { --primary: #00ffaa; --bg: #111; --card: #222; --text: #eee; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
@@ -37,53 +37,53 @@ const char INDEX_HTML[] PROGMEM = R"rawliteral(
 </head>
 <body>
     <div class="container">
-        <h1>WordClock</h1>
+        <h1>Wortuhr</h1>
         
         <div class="card">
-            <h2>Appearance</h2>
+            <h2>Aussehen</h2>
             <div class="form-group">
-                <label>Color</label>
+                <label>Farbe</label>
                 <input type="color" id="color" value="#00ffaa">
             </div>
             <div class="row">
                 <div class="col form-group">
-                    <label>Day Brightness</label>
+                    <label>Tag Helligkeit</label>
                     <input type="number" id="br_day" min="0" max="255">
                 </div>
                 <div class="col form-group">
-                    <label>Night Brightness</label>
+                    <label>Nacht Helligkeit</label>
                     <input type="number" id="br_night" min="0" max="255">
                 </div>
             </div>
         </div>
 
         <div class="card">
-            <h2>Night Mode (Dim)</h2>
+            <h2>Nachtmodus (Dimmen)</h2>
             <div class="row">
                 <div class="col form-group">
-                    <label>Start Hour</label>
+                    <label>Startstunde</label>
                     <input type="number" id="n_start" min="0" max="23">
                 </div>
                 <div class="col form-group">
-                    <label>End Hour</label>
+                    <label>Endestunde</label>
                     <input type="number" id="n_end" min="0" max="23">
                 </div>
             </div>
         </div>
 
         <div class="card">
-            <h2>Off Schedule</h2>
-            <p style="font-size: 0.9em; color: #aaa;">Select days to enable "Off" hours</p>
+            <h2>Zeitplan fürs Ausschalten</h2>
+            <p style="font-size: 0.9em; color: #aaa;">Wähle die Tage, an denen die Lichter ausgehen sollen</p>
             <div class="form-group checkbox-group" id="days-container">
                 <!-- JS will populate -->
             </div>
             <div class="row">
                 <div class="col form-group">
-                    <label>Off Start Hour</label>
+                    <label>Startstunde</label>
                     <input type="number" id="o_start" min="0" max="23">
                 </div>
                 <div class="col form-group">
-                    <label>Off End Hour</label>
+                    <label>Endstunde</label>
                     <input type="number" id="o_end" min="0" max="23">
                 </div>
             </div>
@@ -92,7 +92,7 @@ const char INDEX_HTML[] PROGMEM = R"rawliteral(
         <div class="card">
              <h2>Options</h2>
              <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
-                <label style="margin:0">Show Date every 30m</label>
+                <label style="margin:0">Zeig Datum alle 30 min</label>
                 <label class="switch">
                   <input type="checkbox" id="show_date">
                   <span class="slider"></span>
@@ -100,11 +100,11 @@ const char INDEX_HTML[] PROGMEM = R"rawliteral(
             </div>
         </div>
 
-        <button onclick="saveSettings()">Save Settings</button>
+        <button onclick="saveSettings()">Einstellungen speichern</button>
     </div>
 
     <script>
-        const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const days = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
         
         function initDays() {
             const container = document.getElementById('days-container');
@@ -157,7 +157,7 @@ const char INDEX_HTML[] PROGMEM = R"rawliteral(
             data.append('show_date', document.getElementById('show_date').checked ? '1' : '0');
 
             let mask = 0;
-            for(let i=0; i<7; i++) { // 0=Sun
+            for(let i=0; i<7; i++) { // 0=Mo
                 if(document.getElementById('day_' + i).checked) mask |= (1 << i);
             }
             data.append('off_days', mask);

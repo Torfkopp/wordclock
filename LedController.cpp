@@ -53,15 +53,15 @@ uint32_t LedController::getCurrentColor() {
 
 void LedController::showStartupAnimation() {
     for(int i=0; i<=NUM_LEDS_TOTAL; i++) {
-        setPixel(i, strip.Color(255, 0, 0));
+        setPixel(i, strip.Color(0, 255, 0));
         strip.show();
         delay(50);
         if (i == 4 || i == 17 || i == 18 || i == 29 || i == 41){
             setPixel(i, strip.Color(255, 255, 0));
         } else if (i == 53 || i == 54 || i == 64 || i == 65 || i == 66 || i == 76) {
-            setPixel(i, strip.Color(255, 128, 0));
+            setPixel(i, strip.Color(0, 255, 255));
         } else if (i == 77 || i == 78 || i == 79 || i == 89 || i == 100 || i == 114 || i == 115 ) {
-            setPixel(i, strip.Color(0, 255, 0));
+            setPixel(i, strip.Color(255, 0, 255));
         } else {
             setPixel(i, strip.Color(0, 0, 0));
         }
@@ -149,7 +149,8 @@ void LedController::updateTimeDisplay() {
     int displayHour = h;
     bool isTo = false;
     
-    if (fiveMinBlock > 6) {
+    // Beginning with fiev voer halv
+    if (fiveMinBlock >= 5) {
         displayHour++;
         isTo = true;
     }

@@ -45,7 +45,8 @@ bool Settings::isNightMode(int currentHour) {
 }
 
 bool Settings::isOffTime(int currentDoW, int currentHour) {
-    // currentDoW: 0=Sun, 1=Mon...6=Sat
+    // Formula to change to normal weekday format instead of the weird US-American one
+    currentDoW = (currentDoW - 1) % 7; // currentDoW: 0=Mon...5=Sat, 6=Sun
     // Check if today is an "off day"
     if (!((cache.off_days_mask >> currentDoW) & 1)) {
         return false; // Today is not enabled for shutting off
